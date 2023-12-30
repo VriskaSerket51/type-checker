@@ -1,6 +1,6 @@
 {
   "name": "typescript-type-checker",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Runtime Type Check for Typescript",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
