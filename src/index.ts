@@ -27,7 +27,7 @@ async function main() {
                 if (declaration.properties.length > 0) {
                     for (const property of declaration.properties) {
                         if (property.type == "number") {
-                            output += `if (typeof checker.${property.name} == "string" && !checker.${property.name}.isEmpty() && !Number.isNaN(Number(checker.${property.name}))) {\n`;
+                            output += `if (typeof checker.${property.name} == "string" && Boolean(checker.${property.name}.trim()) && !Number.isNaN(Number(checker.${property.name}))) {\n`;
                             output += `checker.${property.name} = Number(checker.${property.name})\n`;
                             output += `}\n\n`;
                         }
