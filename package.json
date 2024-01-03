@@ -2,8 +2,7 @@
   "name": "typescript-type-checker",
   "version": "1.1.0",
   "description": "Runtime Type Check for Typescript",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "bin": "dist/index.js",
   "scripts": {
     "test": "nodemon ./test/src/index.ts",
     "build": "rimraf dist/ && tsc"
@@ -28,7 +27,8 @@
     "nodemon": "^3.0.2",
     "rimraf": "^5.0.5",
     "ts-node": "^10.9.2",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "typescript-type-checker": "^1.1.0"
   },
   "dependencies": {
     "ts-command-line-args": "^2.5.1",

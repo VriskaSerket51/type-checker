@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import fs from "fs";
 import { TypescriptParser, InterfaceDeclaration } from "typescript-parser";
 import { readAllFiles } from "./utils";
