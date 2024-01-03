@@ -5,8 +5,8 @@ import { args } from "./args";
 import { defaultTypes } from "./defaultTypes";
 
 const srcDir = args.src;
-
 const outputPath = args.out;
+const strictMode = args.out;
 
 const fileNames: string[] = [];
 
@@ -25,16 +25,18 @@ async function main() {
             if (declaration instanceof InterfaceDeclaration) {
                 output += `function sanitize${declaration.name}(checker: any) {\n`;
                 if (declaration.properties.length > 0) {
-                    for (const property of declaration.properties) {
-                        if (property.type == "number") {
-                            output += `if (typeof checker.${property.name} == "string" && Boolean(checker.${property.name}.trim()) && !Number.isNaN(Number(checker.${property.name}))) {\n`;
-                            output += `checker.${property.name} = Number(checker.${property.name})\n`;
-                            output += `}\n\n`;
-                        }
-                        if (property.type == "boolean") {
-                            output += `if (typeof checker.${property.name} == "string" && (checker.${property.name} == "true" || checker.${property.name} == "false")) {\n`;
-                            output += `checker.${property.name} = checker.${property.name} == "true"\n`;
-                            output += `}\n\n`;
+                    if (!strictMode) {
+                        for (const property of declaration.properties) {
+                            if (property.type == "number") {
+                                output += `if (typeof checker.${property.name} == "string" && Boolean(checker.${property.name}.trim()) && !Number.isNaN(Number(checker.${property.name}))) {\n`;
+                                output += `checker.${property.name} = Number(checker.${property.name})\n`;
+                                output += `}\n\n`;
+                            }
+                            if (property.type == "boolean") {
+                                output += `if (typeof checker.${property.name} == "string" && (checker.${property.name} == "true" || checker.${property.name} == "false")) {\n`;
+                                output += `checker.${property.name} = checker.${property.name} == "true"\n`;
+                                output += `}\n\n`;
+                            }
                         }
                     }
 
