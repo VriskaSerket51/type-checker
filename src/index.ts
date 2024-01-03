@@ -6,7 +6,7 @@ import { defaultTypes } from "./defaultTypes";
 
 const srcDir = args.src;
 const outputPath = args.out;
-const strictMode = args.out;
+const strictMode = args.strict;
 
 const fileNames: string[] = [];
 
