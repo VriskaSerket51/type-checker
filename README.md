@@ -10,8 +10,8 @@ typescript-type-checker supports all default types, arrays, and custom types.
 
 > args:
 > * --src: Input directory which contains .ts files
-> * --out: Output directory which sanitizer script will be saved to.
-> * --strict: Whether use strict mode. In strict mode, script does not check string value can be converted to number or boolean.
+> * --out: Output directory which sanitizer script will be saved to
+> * --strict: Whether use strict mode. In strict mode, script does not check string value can be converted to number or boolean
 >
 > example: <br />
 > $ typescript-type-checker --src "./src/lib" --out "./out/sanitizer.ts" --strict
