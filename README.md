@@ -6,7 +6,27 @@ It generates runtime type checking sanitizer script for Typescript.
 
 typescript-type-checker supports all default types, arrays, and custom types.
 
+## How to install
+
+`npm install typescript-type-checker`
+
 ## How to use
+
+You can use typescript-type-checker both commandline and script.
+
+### Script usage
+
+```typescript
+import { buildScript } from "typescript-type-checker";
+
+const srcDir = "./src/lib";
+const outputPath = "./out.ts";
+const strictMode = false;
+
+buildScript(srcDir, outputPath, strictMode);
+```
+
+### Commandline usage
 
 > args:
 > * --src: Input directory which contains .ts files
@@ -14,7 +34,7 @@ typescript-type-checker supports all default types, arrays, and custom types.
 > * --strict: Whether use strict mode. In strict mode, script does not check string value can be converted to number or boolean
 >
 > example: <br />
-> $ typescript-type-checker --src "./src/lib" --out "./out/sanitizer.ts" --strict
+> $ npx typescript-type-checker --src "./src/lib" --out "./out/sanitizer.ts" --strict
 
 Then you can get sanitizer script at "./out/sanitizer.ts".
 
