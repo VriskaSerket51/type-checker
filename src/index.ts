@@ -1,20 +1,21 @@
 import fs from "fs";
 import { TypescriptParser, InterfaceDeclaration } from "typescript-parser";
 import { readAllFiles } from "./utils";
-import { args } from "./args";
 import { defaultTypes } from "./defaultTypes";
 
-const srcDir = args.src;
-const outputPath = args.out;
-const strictMode = args.strict;
+export async function buildScript(
+    srcDir: string,
+    outputPath: string,
+    isStrictMode: boolean
+) {
+    let output = "";
 
-const fileNames: string[] = [];
+    const fileNames: string[] = [];
 
-readAllFiles(srcDir, fileNames, (fileName: string) => fileName.endsWith(".ts"));
+    readAllFiles(srcDir, fileNames, (fileName: string) =>
+        fileName.endsWith(".ts")
+    );
 
-let output = "";
-
-async function main() {
     const parser = new TypescriptParser();
     const parsed = await parser.parseFiles(fileNames, srcDir);
 
@@ -25,7 +26,7 @@ async function main() {
             if (declaration instanceof InterfaceDeclaration) {
                 output += `function sanitize${declaration.name}(checker: any) {\n`;
                 if (declaration.properties.length > 0) {
-                    if (!strictMode) {
+                    if (!isStrictMode) {
                         for (const property of declaration.properties) {
                             if (property.type == "number") {
                                 output += `if (typeof checker.${property.name} == "string" && Boolean(checker.${property.name}.trim()) && !Number.isNaN(Number(checker.${property.name}))) {\n`;
@@ -131,5 +132,3 @@ async function main() {
 
     fs.writeFileSync(outputPath, output);
 }
-
-main();
